@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <style>
+            *{
+                  list-style: none;
+            }
+            .product-list{
+                  display: flex;
+                  justify-content: center;
+                  gap: 30px;
+                  flex-wrap: wrap;
+                  
+            }
+            .product-item{
+                  width: 300px;
+                  border: 2px solid #999;
+            }
+          
+
+            .users{
+                  display: flex;
+                  justify-content: center;
+                  gap: 30px;
+                  flex-wrap: wrap;
+            }
+        
+            
+      </style>
+</head>
+<body>
+      
+      <h1>SALOM</h1>
+      <ul class="product-list">
+
+      </ul>
+      <ul class="users">
+
+      </ul>
+      <ul class="recipes">
+
+      </ul>
+
+      <script>
+            let link = 'https://dummyjson.com/products';
+            const productList = document.querySelector('.product-list')
+            fetch(link).then((res)=>{
+                  return res.json()
+            }).then(data =>{
+                  let prds = data.products
+                  prds.forEach(element =>{
+                        let li = document.createElement('li')
+                        li.classList.add('product-item')
+                        li.innerHTML = `
+                              <img src="${element.thumbnail}" alt="">
+                              <h1>${element.title}</h1>
+                              <p class="stock">${element.stock}</p>
+                              <div class="desc">${element.description}</div>
+                        `
+                        productList.appendChild(li)
+                  })
+            })
+
+
+            let link2 = 'http://dummyjson.com/users';
+            const usersList = document.querySelector('.users')
+            fetch(link2).then((res)=>{
+                  return res.json()
+            }).then(data =>{
+                  let usrs = data.users
+                  usrs.forEach(element =>{
+                        console.log(element);
+                        let li = document.createElement('li')
+                        li.classList.add('product-item')
+                        li.innerHTML = `
+                              <img src="${element.image}" alt="">
+                              <h1>${element.lastName}</h1>
+                              <p class="stock">${element.age}</p>
+                              <div class="desc">${element.email}</div>
+                        `
+                        usersList.appendChild(li)
+                  })
+            })
+            let link3 = 'https://dummyjson.com/recipes';
+            const recipesList = document.querySelector('.recipes')
+            fetch(link3).then((res)=>{
+                  return res.json()
+            }).then(data =>{
+                  let rcp = data.recipes
+                  console.log(rcp);
+                  rcp.forEach(element =>{
+                        let li = document.createElement('li')
+                        li.classList.add('product-item')
+                        li.innerHTML = `
+                              <img src="${element.image}" alt="">
+                              <h1>${element.name}</h1>
+                              <p class="stock">${element.tags}</p>
+                              <div class="desc">${element.difficulty}</div>
+                        `
+                        recipesList.appendChild(li)
+                  })
+            })
+
+      </script>
+</body>
+</html>
